@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app-h2-inmemory-db-deployment
+  labels:
+    app: sample-app-h2-inmemory-db
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-app-h2-inmemory-db
+  template:
+    metadata:
+      name: sample-app-h2-inmemory-db-deployment
+      labels:
+        app: sample-app-h2-inmemory-db
+    spec:
+      containers:
+        - name: h2-inmemory-db-app
+          image: krish2091/h2-inmemory-db-app:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9808
+              protocol: TCP
+      restartPolicy: Always
+      
